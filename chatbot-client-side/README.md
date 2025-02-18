@@ -16,6 +16,7 @@ Download and install Node.js from the official website:
 Navigate to the `chatbot-client-side` folder and run the following command to install required modules:  
 
 ```sh
+npm install react-markdown
 npm install
 npm run dev
 ```
