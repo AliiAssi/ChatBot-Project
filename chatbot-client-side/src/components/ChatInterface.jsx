@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import MarkdownComponent from './MarkDownMessage';
 
 const ChatInterface = () => {
-  const api = "https://1e30-34-125-64-155.ngrok-free.app/predict"
+  const api = "https://615a-34-125-232-0.ngrok-free.app/predict";
   // State Management
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -14,36 +15,30 @@ const ChatInterface = () => {
 
   // Auto-scroll when messages update
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
   // Cleanup effect to abort ongoing fetch on unmount
-  useEffect(() => {
-    return () => abortControllerRef.current?.abort();
-  }, []);
+  useEffect(() => () => abortControllerRef.current?.abort(), []);
 
   // Function to send a request to the AI model
   const sendRequest = async (message) => {
     try {
       const response = await fetch(`${api}?input=${encodeURIComponent(message)}`, {
         method: 'GET',
-        headers: {
-          'ngrok-skip-browser-warning': 'true'
-        },
+        headers: { 'ngrok-skip-browser-warning': 'true' },
         mode: 'cors'
       });
-  
+
       if (!response.ok) {
         const errorText = await response.text();
         throw new Error(`Server error: ${errorText}`);
       }
-  
+
       return await response.json();
     } catch (error) {
       console.error('Request failed:', error);
-      return { result: 'Error: Unable to reach the server.' };
+      return { result: `**Error**: ${error.message}` };
     }
   };
 
@@ -61,10 +56,19 @@ const ChatInterface = () => {
       abortControllerRef.current = new AbortController();
 
       const data = await sendRequest(trimmedMessage);
-
-      setMessages((prev) => [...prev, { id: Date.now() + 1, text: data.result, isBot: true }]);
+      
+      setMessages((prev) => [...prev, { 
+        id: Date.now() + 1, 
+        text: data.result, 
+        isBot: true 
+      }]);
     } catch (error) {
-      setMessages((prev) => [...prev, { id: Date.now() + 1, text: `Error:{{ error }}}`, isBot: true, isError: true }]);
+      setMessages((prev) => [...prev, { 
+        id: Date.now() + 1, 
+        text: `**Error**: ${error.message}`,
+        isBot: true,
+        isError: true 
+      }]);
     } finally {
       setIsLoading(false);
       abortControllerRef.current = null;
@@ -95,15 +99,30 @@ const ChatInterface = () => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 max-h-[60vh]">
               {messages.map((msg) => (
                 <div key={msg.id} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`max-w-[80%] rounded-lg p-3 ${msg.isBot ? msg.isError ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800' : 'bg-blue-600 text-white'}`}>
-                    <p className="text-sm">{msg.text}</p>
+                  <div className={`max-w-[80%] rounded-lg p-3 ${
+                    msg.isBot ? 
+                    (msg.isError ? 
+                      'bg-red-100 text-red-800 [&_a]:text-red-700 [&_a]:underline' : 
+                      'bg-gray-100 [&_pre]:bg-gray-800 [&_pre]:text-white [&_pre]:p-3 [&_pre]:rounded [&_code]:bg-gray-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded [&_code]:text-gray-800') : 
+                      'bg-blue-600 text-white [&_a]:text-blue-200 [&_a]:underline'
+                  }`}>
+                  {msg.isBot ? <MarkdownComponent markdownText={msg.text} /> : msg.text}
                   </div>
                 </div>
               ))}
-              {isLoading && <div className="text-gray-500">Typing...</div>}
+              {isLoading && (
+                <div className="flex items-center text-gray-500">
+                  <span className="animate-pulse">Typing</span>
+                  <div className="flex space-x-1 ml-1">
+                    <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce"></div>
+                    <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce delay-100"></div>
+                    <div className="w-1 h-1 bg-gray-500 rounded-full animate-bounce delay-200"></div>
+                  </div>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
 
@@ -115,7 +134,7 @@ const ChatInterface = () => {
                 onChange={(e) => setInputMessage(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder="Type your message..."
-                className="flex-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+                className="flex-1 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
                 disabled={isLoading}
               />
               <button
