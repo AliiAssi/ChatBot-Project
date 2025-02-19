@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import MarkdownComponent from './MarkDownMessage';
 
 const ChatInterface = () => {
-  const api = "https://615a-34-125-232-0.ngrok-free.app/predict";
+  const api = "https://38d6-34-125-7-179.ngrok-free.app/predict";
   // State Management
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [messages, setMessages] = useState([]);
