@@ -1,2 +1,21 @@
 @import "tailwindcss";
 @import 'katex/dist/katex.min.css';
+
+/* PDF Export Overrides */
+.markdown-pdf-export {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6 !important;
+}
+
+.markdown-pdf-export pre {
+background: #f8f8f8 !important;
+padding: 1rem !important;
+border-radius: 4px !important;
+overflow-x: auto !important;
+}
+
+.markdown-pdf-export img {
+max-width: 100% !important;
+height: auto !important;
+margin: 1rem 0 !important;
+}

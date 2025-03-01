@@ -1,4 +1,4 @@
-import MarkdownComponent from './MarkDownMessage';
+import MarkdownComponent from './MarkdownComponent';
 
 const MessageBubble = ({ isBot, isBotError, text }) => (
   <div className={`flex ${isBot ? 'justify-start' : 'justify-end'}`}>
@@ -11,6 +11,9 @@ const MessageBubble = ({ isBot, isBotError, text }) => (
     }`}>
       {isBot ? <MarkdownComponent markdownText={text} /> : text}
     </div>
+    {/*
+    Buttons to be integrated: button to for saving it as bookmark, button for extracting the information as PDF, button to see more
+    */}
   </div>
 );
 
