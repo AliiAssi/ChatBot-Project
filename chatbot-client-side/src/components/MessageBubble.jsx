@@ -11,9 +11,6 @@ const MessageBubble = ({ isBot, isBotError, text }) => (
     }`}>
       {isBot ? <MarkdownComponent markdownText={text} /> : text}
     </div>
-    {/*
-    Buttons to be integrated: button to for saving it as bookmark, button for extracting the information as PDF, button to see more
-    */}
   </div>
 );
 

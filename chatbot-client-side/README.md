@@ -17,6 +17,7 @@ Navigate to the `chatbot-client-side` folder and run the following command to in
 
 ```sh
 npm install
+npm install docx file-saver
 npm install react-markdown remark-gfm remark-math rehype-katex rehype-highlight katex prop-types
 npm install @heroicons/react rehype-sanitize
 npm install react-dom html2canvas jspdf

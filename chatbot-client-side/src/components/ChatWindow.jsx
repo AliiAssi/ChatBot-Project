@@ -5,6 +5,7 @@ import ChatInput from './ChatInput';
 import LoadingIndicator from './LoadingIndicator';
 import ChatWindowHeader from './ChatWindowHeader';
 
+
 const ChatWindow = ({ onClose }) => {
   const {
     messages,
@@ -33,6 +34,7 @@ const ChatWindow = ({ onClose }) => {
       <ChatWindowHeader 
         onClose={onClose} 
         onShowBookmarks={handleShowBookmark}
+        conversation={messages} 
       />
 
       {/* Messages Area */}
