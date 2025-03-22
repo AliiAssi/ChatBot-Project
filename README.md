@@ -1,7 +1,7 @@
 # BONDO2: RAG-based University Chatbot
 
 ## Overview
-BONDO2 is a retrieval-augmented generation (RAG) based chatbot designed specifically for universities. It allows you to upload your own data sources (CSV, TXT, or JSON files, PDFs) and create an interactive chatbot that can enhancing administrative and academic support through Intelligent Information Retrieval
+BONDO2 is a retrieval-augmented generation (RAG) based chatbot designed specifically for universities. It allows you to upload your own data sources (CSV, TXT, or JSON files, PDFs) and create an interactive chatbot that can enhance administrative and academic support through Intelligent Information Retrieval
 
 
 ## How to Use
