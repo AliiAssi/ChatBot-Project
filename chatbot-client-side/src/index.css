@@ -19,3 +19,7 @@ max-width: 100% !important;
 height: auto !important;
 margin: 1rem 0 !important;
 }
+
+body {
+    font-family: cursive;
+}
