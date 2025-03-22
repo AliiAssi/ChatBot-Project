@@ -1,0 +1,71 @@
+{
+  "university": {
+    "name": "Lebanese University",
+    "faculties": [
+      {
+        "name": "Faculty of Sciences",
+        "majors": [
+          {
+            "name": "Computer Science",
+            "years": 3,
+            "credits_per_semester": 30,
+            "total_credits": 180,
+            "elective_credits": 20,
+            "mandatory_credits": 160,
+            "attendance_obligatory": true,
+            "courses": [
+              {
+                "name": "Computer Vision",
+                "professors": ["Dr. Ali", "Dr. Mohamad"]
+              },
+              {
+                "name": "Machine Learning",
+                "professors": ["Dr. Houssein"]
+              }
+            ]
+          },
+          {
+            "name": "Mathematics",
+            "years": 3,
+            "credits_per_semester": 30,
+            "total_credits": 180,
+            "elective_credits": 25,
+            "mandatory_credits": 155
+          }
+        ]
+      },
+      {
+        "name": "Faculty of Engineering",
+        "majors": [
+          {
+            "name": "Electrical Engineering",
+            "years": 5,
+            "credits_per_semester": 30,
+            "total_credits": 300
+          }
+        ]
+      }
+    ],
+    "admission": {
+      "how_to_apply": "Submit an online application and provide required documents.",
+      "required_documents": ["ID Card", "High School Diploma", "Transcripts", "Recommendation Letter"]
+    },
+    "professors": [
+      {
+        "name": "Dr. Ali",
+        "publications": 15,
+        "specialization": "Computer Vision"
+      },
+      {
+        "name": "Dr. Houssein",
+        "publications": 12,
+        "specialization": "AI"
+      },
+      {
+        "name": "Dr. Mouhamad",
+        "publications": 8,
+        "specialization": "Machine Learning"
+      }
+    ]
+  }
+}
